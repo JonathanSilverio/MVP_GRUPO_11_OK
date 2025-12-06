@@ -11,7 +11,7 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: var(--verde-fundo);
+  background-color: #e0f2e9;
   color: var(--texto);
   line-height: 1.4;
 }
