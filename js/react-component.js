@@ -18,10 +18,10 @@
           fontFamily: 'Arial, sans-serif'
         }
       },
-      // React.createElement('h3', { style: { margin: '6px 0', color: '#2e7d32' } }, 'Componente React ativo! 🌿'),
-      // React.createElement('p', { style: { margin: '6px 0' } }, 'Este widget confirma que seu site está usando React.'),
-      // React.createElement(
-        // 'button',
+      React.createElement('h3', { style: { margin: '6px 0', color: '#2e7d32' } }, 'Componente React ativo! 🌿'),
+      React.createElement('p', { style: { margin: '6px 0' } }, 'Este widget confirma que seu site está usando React.'),
+      React.createElement(
+        'button',
         {
           onClick: function() {
             // contador simples sem state - altera texto do botão como demonstração mínima
