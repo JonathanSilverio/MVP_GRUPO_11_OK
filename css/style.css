@@ -47,20 +47,29 @@ nav ul li a{
   font-weight: 600;
 }
 
-/* Hero */
-.hero{
-  padding: 40px 16px;
-  background: linear-gradient(180deg, var(--verde-claro) 0%, #d7efd7 100%);
+/* Hero com imagem */
+.hero {
+  padding: 80px 20px;
   text-align: center;
+  color: var(--branco);
+
+  /* IMAGEM + DARK OVERLAY */
+  background:
+    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+    url('../img/serra-dos-orgaos-rj-media.jpg') center/cover no-repeat;
 }
 
 .hero h2{
   margin: 0 0 8px 0;
+  font-size: 2rem;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
 .hero p{
   margin: 0;
   opacity: 0.95;
+  font-size: 1.1rem;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.45);
 }
 
 /* Cards / listas */
@@ -116,5 +125,5 @@ footer{
 @media (max-width: 600px){
   nav ul li { display: block; margin: 8px 0; }
   .cards { padding: 12px; gap: 12px; }
-  .hero { padding: 28px 12px; }
+  .hero { padding: 60px 12px; }
 }
