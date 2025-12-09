@@ -47,9 +47,10 @@ nav ul li a{
   font-weight: 600;
 }
 
-/* Hero com imagem */
+
 .hero {
   padding: 80px 20px;
+  min-height: 380px;
   text-align: center;
   color: var(--branco);
 
@@ -117,7 +118,7 @@ button{
 footer{
   text-align: center;
   padding: 14px 8px;
-  padding-bottom: 80px;
+  padding-bottom: 180px;
   font-size: 0.9rem;
   color: rgba(0,0,0,0.6);
 }
