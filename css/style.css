@@ -51,6 +51,7 @@ nav ul li a{
 .hero {
   padding: 80px 20px;
   min-height: 380px;
+  margin-bottom: 120px;
   text-align: center;
   color: var(--branco);
 
