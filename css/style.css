@@ -116,7 +116,8 @@ button{
 /* Footer */
 footer{
   text-align: center;
-  padding: 60px 8px;
+  padding: 14px 8px;
+  padding-bottom: 80px;
   font-size: 0.9rem;
   color: rgba(0,0,0,0.6);
 }
