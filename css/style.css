@@ -49,12 +49,11 @@ nav ul li a{
 
 
 .hero {
-  padding: 80px 20px;
-  min-height: 260px;
+  min-height: 450px;
+  padding: 120px 20px 100px;
   text-align: center;
   color: var(--branco);
 
-  /* IMAGEM + DARK OVERLAY */
   background:
     linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
     url('../img/serra-dos-orgaos-rj-media.jpg') center/cover no-repeat;
