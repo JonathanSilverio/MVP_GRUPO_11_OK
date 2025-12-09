@@ -19,45 +19,15 @@ Desenvolver protótipo para o MVP
 
 Descrição resumida das principais tecnologias aplicadas no desenvolvimento do MVP:
 
-* HTML/CSS/JavaScript – Estruturação, estilização e comportamento das páginas.
+* HTML/CSS – Estruturação, estilização e comportamento das páginas.
 
 * Framework Front-end (ex.: React) – Para construção da interface amigável e responsiva.
 
-* Backend (ex.: Node.js ou Python/Flask) – Para gerenciamento dos dados, autenticação e lógica.
-
-* Banco de Dados (ex.: MySQL, MongoDB) – Armazenamento de informações sobre biodiversidade, trilhas, eventos e disponibilidade.
-
-* Hospedagem (ex.: Vercel, Netlify ou servidor próprio) – Tornar o site acessível ao público.
-
 ## ▶️ Como Executar ou Abrir o MVP
 
-Passo a passo para rodar a aplicação:
+Basta acessar o link abaixo:
 
-1. Clone o repositório:
-
-   ```bash
-   git clone https://github.com/usuario/repositorio.git
-   ```
-2. Acesse a pasta do projeto:
-
-   ```bash
-   cd nome-do-projeto
-   ```
-3. Instale as dependências (se houver):
-
-   ```bash
-   comando de instalação
-   ```
-4. Execute o projeto:
-
-   ```bash
-   comando de execução
-   ```
-5. Informações adicionais (ex: acesso via navegador, login, etc.)
-
-## ℹ️ Informações Adicionais
-
-Coloque aqui detalhes relevantes sobre o sistema, arquitetura, decisões de projeto, limitações ou versões.
+https://jonathansilverio.github.io/MVP_GRUPO_11_OK/index.html
 
 ## 🧪 MVP Definido
 
@@ -69,7 +39,7 @@ Desenvolvimento de um website funcional contendo:
 
 - Sistema básico de login para administradores.
 
-- Área administrativa para atualização de informações e gestão de disponibilidade.
+- Área administrativa para atualização de informações e gestão de disponibilidade. (a ser desenvolvida)
 
 ## 🎯 Objetivos e Benefícios do Produto
 
