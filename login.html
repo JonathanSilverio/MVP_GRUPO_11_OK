@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Login</title>
-<link rel="stylesheet" href="/MVP_GRUPO_11_OK/css/style.css">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/MVP_GRUPO_11_OK/css/style.css">
 </head>
 <body>
-<header>
-<h1>Login do Administrador</h1>
-</header>
+    <header>
+        <h1>Login do Administrador</h1>
+    </header>
 
+    <section>
+        <form id="loginForm">
+            <input type="text" id="usuarioInput" placeholder="Usuário" required>
+            <input type="password" id="senhaInput" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+    </section>
 
-<section>
-<form id="loginForm">
-<input type="text" placeholder="Usuário" required>
-<input type="password" placeholder="Senha" required>
-<button type="submit">Entrar</button>
-</form>
-</section>
-
-
-<script src="js/script.js"></script>
+    <!-- 1. Biblioteca do Supabase via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- 2. Seu arquivo de script local -->
+    <script src="js/script.js"></script>
 </body>
 </html>
