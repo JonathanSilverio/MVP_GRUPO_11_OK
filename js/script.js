@@ -1,12 +1,46 @@
 document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('loginForm');
+  
   if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      // opcional: você pode checar valores aqui antes de redirecionar
-      // const usuario = form.querySelector('input[type="text"]').value;
-      // const senha = form.querySelector('input[type="password"]').value;
-      window.location.href = 'admin.html';
+    // 1. Conexão com o Supabase na Nuvem (substitua com suas chaves)
+    const SUPABASE_URL = 'https://SUA_URL_AQUI.supabase.co';
+    const SUPABASE_ANON_KEY = 'SUA_CHAVE_ANON_AQUI';
+    
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault(); // Impede o recarregamento padrão da página
+
+      // Pega os valores digitados nos inputs do seu HTML
+      const usuarioDigitado = document.getElementById('usuarioInput').value;
+      const senhaDigitada = document.getElementById('senhaInput').value;
+
+      try {
+        // Consulta na tabela 'usuarios' lá no Supabase
+        const { data, error } = await _supabase
+          .from('usuarios')
+          .select('*')
+          .eq('nome', usuarioDigitado)
+          .eq('senha', senhaDigitada);
+
+        if (error) {
+          alert('Erro ao conectar com o banco: ' + error.message);
+          return;
+        }
+
+        // Se encontrou o usuário e a senha bateu no banco
+        if (data && data.length > 0) {
+          alert('Login realizado com sucesso! Bem-vindo, ' + data[0].nome);
+          // Redireciona para o painel administrativo que você já usava
+          window.location.href = 'admin.html';
+        } else {
+          alert('Usuário ou senha incorretos.');
+        }
+
+      } catch (err) {
+        console.error('Erro na requisição:', err);
+        alert('Ocorreu um erro ao tentar fazer o login.');
+      }
     });
   }
 });
