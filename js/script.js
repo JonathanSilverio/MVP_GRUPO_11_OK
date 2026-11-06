@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('loginForm');
   
   if (form) {
-    // 1. Conexão com o Supabase na Nuvem (substitua com suas chaves)
+    // 1. Conexão corrigida com a URL completa e a nova chave Publishable
     const SUPABASE_URL = 'https://hxbjzzcqrzqtwfbevbgq.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_KzosMDDebQMNjV3stt7hwg_2KrFxrTW';
     
