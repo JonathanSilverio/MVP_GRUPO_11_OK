@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (form) {
     // 1. Conexão com o Supabase na Nuvem (substitua com suas chaves)
-    const SUPABASE_URL = 'https://SUA_URL_AQUI.supabase.co';
-    const SUPABASE_ANON_KEY = 'SUA_CHAVE_ANON_AQUI';
+    const SUPABASE_URL = 'https://hxbjzzcqrzqtwfbevbgq.supabase.co/rest/v1/';
+    const SUPABASE_ANON_KEY = 'sb_publishable_KzosMDDebQMNjV3stt7hwg_2KrFxrTW';
     
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
