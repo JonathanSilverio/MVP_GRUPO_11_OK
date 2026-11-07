@@ -2,35 +2,43 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Eventos Ambientais - Terê Verde Online</title>
+<title>Login - Terê Verde Online</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>Terê Verde Online</h1>
-        <nav>
-            <a href="index.html">Início</a>
-            <a href="parques.html">Parques</a>
-            <a href="trilhas.html">Trilhas</a>
-            <a href="biodiversidade.html">Biodiversidade</a>
-            <a href="eventos.html">Eventos</a>
-            <a href="login.html">Login</a>
-        </nav>
-    </header>
 
-    <section>
-        <h2>Login do Administrador</h2>
-        <form id="loginForm">
-            <input type="text" id="usuarioInput" placeholder="Usuário" required>
-            <input type="password" id="senhaInput" placeholder="Senha" required>
-            <button type="submit">Entrar</button>
-        </form>
-    </section>
+<header>
+    <h1>Login</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="parques.html">Parques</a></li>
+            <li><a href="trilhas.html">Trilhas</a></li>
+            <li><a href="biodiversidade.html">Biodiversidade</a></li>
+            <li><a href="eventos.html">Eventos</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <!-- 1. Biblioteca do Supabase via CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <!-- 2. Seu arquivo de script local -->
-    <script src="js/script.js"></script>
+<section class="conteudo" style="text-align: center; margin-top: 40px;">
+    <h2>Login do Administrador</h2>
+    <form id="loginForm" style="max-width: 300px; margin: 20px auto; display: flex; flex-direction: column; gap: 15px;">
+        <input type="text" id="usuarioInput" placeholder="Usuário" required style="padding: 10px;">
+        <input type="password" id="senhaInput" placeholder="Senha" required style="padding: 10px;">
+        <button type="submit" style="padding: 10px; cursor: pointer;">Entrar</button>
+    </form>
+</section>
+
+<footer>
+    <p>© 2025 Terê Verde Online</p>
+</footer>
+
+<!-- 1. Biblioteca do Supabase via CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- 2. Seu arquivo de script local -->
+<script src="js/script.js"></script>
+
 </body>
 </html>
