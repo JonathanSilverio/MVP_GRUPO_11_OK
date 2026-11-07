@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('cadastroForm');
   
   if (form) {
-    // Suas credenciais do Supabase
     const SUPABASE_URL = 'https://hxbjzzcqrzqtwfbevbgq.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_KzosMDDebQMNjV3stt7hwg_2KrFxrTW';
     
@@ -11,10 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
 
-      // Pega os valores preenchidos nos inputs
-      const nomeDigitado = document.getElementById('novoUsuario').value;
-      const emailDigitado = document.getElementById('novoEmail').value;
-      const senhaDigitada = document.getElementById('novaSenha').value;
+      // Pega os valores dos inputs (login, email e senha)
+      const nomeDigitado = document.getElementById('nomeInput').value;
+      const emailDigitado = document.getElementById('emailInput').value;
+      const senhaDigitada = document.getElementById('senhaInput').value;
 
       try {
         // Insere os dados na tabela 'usuarios'
@@ -33,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
           return;
         }
 
-        alert('Usuário cadastrado com sucesso!');
-        form.reset(); // Limpa o formulário
+        alert('Usuário cadastrado com sucesso! Agora você pode fazer o login.');
+        window.location.href = 'login.html'; // Redireciona para a tela de login
 
       } catch (err) {
         console.error('Erro na requisição:', err);
