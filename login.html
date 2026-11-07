@@ -21,12 +21,23 @@
     </nav>
 </header>
 
-<section class="conteudo" style="text-align: center; margin-top: 40px;">
-    <h2>Login do Administrador</h2>
-    <form id="loginForm" style="max-width: 300px; margin: 20px auto; display: flex; flex-direction: column; gap: 15px;">
-        <input type="text" id="usuarioInput" placeholder="Usuário" required style="padding: 10px;">
-        <input type="password" id="senhaInput" placeholder="Senha" required style="padding: 10px;">
-        <button type="submit" style="padding: 10px; cursor: pointer;">Entrar</button>
+<!-- Usamos a classe 'conteudo' para herdar exatamente o mesmo espaçamento e estilo das outras telas -->
+<section class="conteudo">
+    <h2>Acesso ao Painel Administrativo</h2>
+    <p>Insira suas credenciais para gerenciar o conteúdo do site.</p>
+
+    <form id="loginForm" style="margin-top: 20px; display: flex; flex-direction: column; max-width: 320px; gap: 15px;">
+        <div>
+            <label for="usuarioInput" style="display: block; margin-bottom: 5px; font-weight: bold;">Usuário:</label>
+            <input type="text" id="usuarioInput" placeholder="Digite seu usuário" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+        </div>
+        
+        <div>
+            <label for="senhaInput" style="display: block; margin-bottom: 5px; font-weight: bold;">Senha:</label>
+            <input type="password" id="senhaInput" placeholder="Digite sua senha" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+        </div>
+
+        <button type="submit" style="padding: 10px; background-color: #2e6930; color: white; border: none; cursor: pointer; font-weight: bold;">Entrar</button>
     </form>
 </section>
 
