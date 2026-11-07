@@ -2,22 +2,23 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastrar Novo Usuário</title>
+    <title>Cadastro - Terê Verde Online</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
-        <h1>Cadastro de Usuários</h1>
+        <h1>Cadastro de Novo Usuário</h1>
     </header>
 
     <section>
         <form id="cadastroForm">
-            <input type="text" id="novoUsuario" placeholder="Nome de Usuário" required>
-            <input type="email" id="novoEmail" placeholder="E-mail" required>
-            <input type="password" id="novaSenha" placeholder="Senha" required>
-            <button type="submit">Cadastrar Usuário</button>
+            <!-- Campos solicitados: login (nome), email e senha -->
+            <input type="text" id="nomeInput" placeholder="Nome de Usuário (Login)" required>
+            <input type="email" id="emailInput" placeholder="E-mail" required>
+            <input type="password" id="senhaInput" placeholder="Senha" required>
+            <button type="submit">Cadastrar</button>
         </form>
-        <p><a href="admin.html">Voltar ao Painel</a></p>
+        <p><a href="login.html">Já tem uma conta? Faça login</a></p>
     </section>
 
     <!-- Biblioteca do Supabase via CDN -->
