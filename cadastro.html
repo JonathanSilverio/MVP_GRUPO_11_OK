@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Novo Usuário</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Cadastro de Usuários</h1>
+    </header>
+
+    <section>
+        <form id="cadastroForm">
+            <input type="text" id="novoUsuario" placeholder="Nome de Usuário" required>
+            <input type="email" id="novoEmail" placeholder="E-mail" required>
+            <input type="password" id="novaSenha" placeholder="Senha" required>
+            <button type="submit">Cadastrar Usuário</button>
+        </form>
+        <p><a href="admin.html">Voltar ao Painel</a></p>
+    </section>
+
+    <!-- Biblioteca do Supabase via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Script de cadastro -->
+    <script src="js/cadastro.js"></script>
+</body>
+</html>
