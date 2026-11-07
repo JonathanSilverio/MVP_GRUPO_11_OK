@@ -1,24 +1,46 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<title>Área Administrativa</title>
-<link rel="stylesheet" href="/MVP_GRUPO_11_OK/css/style.css">
-</head>
-<body>
-<header>
-<h1>Painel Administrativo</h1>
-</header>
+<section class="conteudo">
+    <h2>Painel do Administrador</h2>
+    <p>Bem-vindo ao painel de controle. Aqui você pode cadastrar novos eventos para o Terê Verde Online.</p>
 
+    <!-- Formulário para cadastrar novos eventos -->
+    <div style="background: #f4f4f4; padding: 20px; border-radius: 8px; margin-top: 20px;">
+        <h3>Cadastrar Novo Evento</h3>
+        <form id="formNovoEvento" style="display: flex; flex-direction: column; gap: 10px; max-width: 500px;">
+            <input type="text" id="eventoTitulo" placeholder="Título do Evento" required style="padding: 8px;">
+            <input type="text" id="eventoData" placeholder="Data (ex: 15/12/2026)" required style="padding: 8px;">
+            <input type="text" id="eventoLocal" placeholder="Local" required style="padding: 8px;">
+            <textarea id="eventoDescricao" placeholder="Descrição do Evento" rows="3" required style="padding: 8px;"></textarea>
+            <button type="submit" style="padding: 10px; background-color: #2e6930; color: white; border: none; cursor: pointer; font-weight: bold;">Salvar Evento</button>
+        </form>
+    </div>
 
-<section>
-<ul>
-<li>Gerenciar Trilhas</li>
-<li>Adicionar Eventos</li>
-<li>Atualizar Biodiversidade</li>
-</ul>
+    <p style="margin-top: 30px;"><a href="index.html">Ir para o site</a></p>
 </section>
 
+<!-- Script para lidar com o envio para o Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = 'https://hxbjzzcqrzqtwfbevbgq.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_KzosMDDebQMNjV3stt7hwg_2KrFxrTW';
+  const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-</body>
-</html>
+  document.getElementById('formNovoEvento').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const titulo = document.getElementById('eventoTitulo').value;
+    const data = document.getElementById('eventoData').value;
+    const local = document.getElementById('eventoLocal').value;
+    const descricao = document.getElementById('eventoDescricao').value;
+
+    const { error } = await _supabase
+      .from('eventos')
+      .insert([{ titulo, data, local, descricao }]);
+
+    if (error) {
+      alert('Erro ao cadastrar evento: ' + error.message);
+    } else {
+      alert('Evento cadastrado com sucesso!');
+      document.getElementById('formNovoEvento').reset();
+    }
+  });
+</script>
