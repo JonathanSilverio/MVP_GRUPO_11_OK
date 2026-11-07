@@ -2,19 +2,29 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="/MVP_GRUPO_11_OK/css/style.css">
+    <title>Login - Terê Verde Online</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Cabeçalho padrão unificado com o menu de navegação do site -->
     <header>
-        <h1>Login do Administrador</h1>
+        <h1>Terê Verde Online</h1>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="parques.html">Parques</a>
+            <a href="trilhas.html">Trilhas</a>
+            <a href="biodiversidade.html">Biodiversidade</a>
+            <a href="eventos.html">Eventos</a>
+            <a href="login.html" class="active">Login</a>
+        </nav>
     </header>
 
-    <section>
-        <form id="loginForm">
-            <input type="text" id="usuarioInput" placeholder="Usuário" required>
-            <input type="password" id="senhaInput" placeholder="Senha" required>
-            <button type="submit">Entrar</button>
+    <section style="margin-top: 40px; text-align: center;">
+        <h2>Login do Administrador</h2>
+        <form id="loginForm" style="max-width: 300px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px;">
+            <input type="text" id="usuarioInput" placeholder="Usuário" required style="padding: 8px;">
+            <input type="password" id="senhaInput" placeholder="Senha" required style="padding: 8px;">
+            <button type="submit" style="padding: 10px; background-color: #2e6930; color: white; border: none; cursor: pointer;">Entrar</button>
         </form>
     </section>
 
