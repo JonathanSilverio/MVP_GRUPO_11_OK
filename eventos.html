@@ -4,6 +4,23 @@
 <meta charset="UTF-8">
 <title>Eventos Ambientais - Terê Verde Online</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+  /* Pequeno ajuste para dar margem nas laterais e espaçamento entre os cards */
+  #listaEventos {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .evento-card {
+    background: white; 
+    padding: 20px; 
+    border-radius: 8px; 
+    border-left: 5px solid #2e6930; 
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+</style>
 </head>
 <body>
 
@@ -21,7 +38,7 @@
     </nav>
 </header>
 
-<!-- Cards decorativos no topo (exatamente como estavam no seu modelo original) -->
+<!-- Cards decorativos no topo -->
 <section class="cards">
     <div class="card">
         <h3>Corrida Ecológica</h3>
@@ -40,7 +57,7 @@
 
     <h2>🌿 Próximos Eventos</h2>
 
-    <!-- Onde os eventos cadastrados no painel administrativo vão aparecer com o layout correto -->
+    <!-- Onde os eventos cadastrados no painel administrativo vão aparecer -->
     <div id="listaEventos">
         <p>Carregando eventos do banco...</p>
     </div>
@@ -53,11 +70,23 @@
 <!-- 1. Biblioteca do Supabase via CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- 2. Script para buscar os eventos do Supabase e renderizar mantendo o padrão visual -->
+<!-- 2. Script para buscar, formatar a data e renderizar os eventos -->
 <script>
   const SUPABASE_URL = 'https://hxbjzzcqrzqtwfbevbgq.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_KzosMDDebQMNjV3stt7hwg_2KrFxrTW';
   const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Função para converter data do formato AAAA-MM-DD para DD/MM/AAAA (caso venha invertida)
+  function formataData(dataStr) {
+    if (!dataStr) return '';
+    // Se a data já estiver no formato brasileiro ou texto livre, retorna como está
+    if (!dataStr.includes('-')) return dataStr;
+    const partes = dataStr.split('-');
+    if (partes.length === 3) {
+      return `${partes[2]}/${partes[1]}/${partes[0]}`;
+    }
+    return dataStr;
+  }
 
   async function carregarEventos() {
     const { data: eventos, error } = await _supabase
@@ -79,11 +108,11 @@
 
     container.innerHTML = '';
     eventos.forEach(ev => {
-      // Usamos a classe 'evento-card' que já existe no seu estilo padrão
+      const dataFormatada = formataData(ev.data);
       container.innerHTML += `
         <div class="evento-card">
             <h3>${ev.titulo}</h3>
-            <p><strong>Data:</strong> ${ev.data}</p>
+            <p><strong>Data:</strong> ${dataFormatada}</p>
             <p><strong>Descrição:</strong> ${ev.descricao}</p>
             <p><strong>Local:</strong> ${ev.local}</p>
         </div>
