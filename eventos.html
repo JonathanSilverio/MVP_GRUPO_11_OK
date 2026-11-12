@@ -5,7 +5,7 @@
 <title>Eventos Ambientais - Terê Verde Online</title>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  /* Garante margens seguras em toda a área de conteúdo da página */
+  /* Garante margens seguras e espaçamento em toda a página */
   .conteudo {
     max-width: 900px !important;
     margin: 30px auto !important;
@@ -30,30 +30,6 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-  }
-
-  /* Card de Próximos Eventos com cor marcante e moderna (Tom de verde-claro/oliva acinzentado super distinto) */
-  .evento-card {
-    background-color: #eaf3ed !important;
-    border: 2px solid #b5d3be !important;
-    padding: 24px 28px !important;
-    border-radius: 10px !important;
-    border-left: 8px solid #1e4d20 !important;
-    color: #1a2e1b !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important;
-  }
-
-  .evento-card h3 {
-    margin-top: 0;
-    margin-bottom: 12px;
-    color: #143816 !important;
-    font-size: 1.35rem;
-  }
-
-  .evento-card p {
-    margin: 8px 0;
-    line-height: 1.5;
-    color: #2c4a2e !important;
   }
 
   /* Seção de Eventos Realizados */
@@ -114,7 +90,7 @@
 <!-- 1. Biblioteca do Supabase via CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- 2. Script para buscar e formatar os eventos -->
+<!-- 2. Script para buscar, formatar e injetar o estilo direto no elemento -->
 <script>
   const SUPABASE_URL = 'https://hxbjzzcqrzqtwfbevbgq.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_KzosMDDebQMNjV3stt7hwg_2KrFxrTW';
@@ -151,12 +127,13 @@
     container.innerHTML = '';
     eventos.forEach(ev => {
       const dataFormatada = formataData(ev.data);
+      // Estilo direto no HTML via JavaScript para garantir que nenhuma regra externa pinte de branco
       container.innerHTML += `
-        <div class="evento-card">
-            <h3>${ev.titulo}</h3>
-            <p><strong>📅 Data:</strong> ${dataFormatada}</p>
-            <p><strong>📍 Local:</strong> ${ev.local}</p>
-            <p style="margin-top: 10px;"><strong>📝 Descrição:</strong> ${ev.descricao}</p>
+        <div style="background-color: #d8eadf !important; border: 2px solid #a3d0b2 !important; padding: 24px 28px !important; border-radius: 10px !important; border-left: 8px solid #1e4d20 !important; color: #1a2e1b !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important; margin-bottom: 15px !important;">
+            <h3 style="margin-top: 0; margin-bottom: 12px; color: #143816 !important; font-size: 1.35rem;">${ev.titulo}</h3>
+            <p style="margin: 8px 0; color: #2c4a2e !important;"><strong>📅 Data:</strong> ${dataFormatada}</p>
+            <p style="margin: 8px 0; color: #2c4a2e !important;"><strong>📍 Local:</strong> ${ev.local}</p>
+            <p style="margin: 12px 0 0 0; color: #2c4a2e !important;"><strong>📝 Descrição:</strong> ${ev.descricao}</p>
         </div>
       `;
     });
