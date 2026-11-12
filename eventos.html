@@ -5,21 +5,71 @@
 <title>Eventos Ambientais - Terê Verde Online</title>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  /* Força a largura máxima menor e a cor diferenciada no card */
-  .evento-card {
-    background-color: #f4fbf6 !important;
-    max-width: 650px !important;
-    padding: 20px !important;
-    margin-bottom: 15px !important;
-    border-radius: 8px !important;
-    border-left: 6px solid #2e6930 !important;
-    color: #333 !important;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1) !important;
+  /* Container centralizado para manter o respiro nas laterais */
+  .conteudo-principal {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
   }
+
+  .conteudo-principal > p {
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 25px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    color: #1e4d20;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #listaEventos {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  /* Design Moderno para o Card de Próximos Eventos */
+  .evento-card {
+    background: linear-gradient(135deg, #f7fbf8 0%, #edf7f0 100%);
+    border: 1px solid #d5e8da;
+    max-width: 100%;
+    padding: 24px 28px;
+    border-radius: 12px;
+    border-left: 6px solid #2e6930;
+    color: #2c3e50;
+    box-shadow: 0 4px 15px rgba(46, 105, 48, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .evento-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46, 105, 48, 0.12);
+  }
+
+  .evento-card h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: #1e4d20;
+    font-size: 1.3rem;
+  }
+
+  .evento-card p {
+    margin: 6px 0;
+    line-height: 1.5;
+    color: #4a5568;
+  }
+
+  /* Seção de Eventos Realizados (Estilo Minimalista) */
   .secao-realizados {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 2px solid #ddd;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #e2e8f0;
   }
 </style>
 </head>
@@ -39,28 +89,28 @@
     </nav>
 </header>
 
-<section class="conteudo">
+<section class="conteudo-principal">
     <p>
         Aqui você encontra uma lista de eventos, ações e campanhas relacionadas à preservação ambiental, sustentabilidade e educação ecológica.
     </p>
 
-    <!-- 1. Próximos Eventos vindos do Supabase no Topo -->
+    <!-- Próximos Eventos (Dinamicos do Supabase) -->
     <h2>🌿 Próximos Eventos</h2>
     <div id="listaEventos">
-        <p>Carregando eventos do banco...</p>
+        <p style="color: #666; font-style: italic;">Sincronizando com os eventos cadastrados...</p>
     </div>
 
-    <!-- 2. Eventos já realizados na parte de baixo -->
+    <!-- Eventos Já Realizados (Histórico) -->
     <div class="secao-realizados">
         <h2>📅 Eventos já realizados</h2>
         <div class="cards" style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
-            <div class="card" style="background: white; padding: 15px; border-radius: 5px;">
-                <h3>Corrida Ecológica</h3>
-                <p>Data: 12/04/2025</p>
+            <div class="card" style="background: white; padding: 18px; border-radius: 8px; border: 1px solid #e2e8f0; flex: 1; min-width: 250px;">
+                <h3 style="color: #2e6930; margin-top:0;">Corrida Ecológica</h3>
+                <p style="color: #666; margin-bottom:0;">Data: 12/04/2025</p>
             </div>
-            <div class="card" style="background: white; padding: 15px; border-radius: 5px;">
-                <h3>Palestra sobre Biodiversidade</h3>
-                <p>Data: 20/05/2025</p>
+            <div class="card" style="background: white; padding: 18px; border-radius: 8px; border: 1px solid #e2e8f0; flex: 1; min-width: 250px;">
+                <h3 style="color: #2e6930; margin-top:0;">Palestra sobre Biodiversidade</h3>
+                <p style="color: #666; margin-bottom:0;">Data: 20/05/2025</p>
             </div>
         </div>
     </div>
@@ -77,7 +127,7 @@
 <script>
   const SUPABASE_URL = 'https://hxbjzzcqrzqtwfbevbgq.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_KzosMDDebQMNjV3stt7hwg_2KrFxrTW';
-  const _supabase = supabase.Client ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   function formataData(dataStr) {
     if (!dataStr) return '';
@@ -98,24 +148,24 @@
     const container = document.getElementById('listaEventos');
     
     if (error) {
-      container.innerHTML = '<p>Erro ao carregar eventos.</p>';
+      container.innerHTML = '<p style="color: #c53030;">Erro ao carregar os eventos do banco.</p>';
       return;
     }
 
     if (!eventos || eventos.length === 0) {
-      container.innerHTML = '<p>Nenhum próximo evento cadastrado no momento.</p>';
+      container.innerHTML = '<p style="color: #666; font-style: italic;">Nenhum próximo evento cadastrado no momento. Acesse o painel administrativo para adicionar!</p>';
       return;
     }
 
     container.innerHTML = '';
-    eventos.forEach(ev => {
+    eventos.exports = eventos.forEach(ev => {
       const dataFormatada = formataData(ev.data);
       container.innerHTML += `
         <div class="evento-card">
-            <h3 style="margin-top:0; color:#1e4d20;">${ev.titulo}</h3>
-            <p><strong>Data:</strong> ${dataFormatada}</p>
-            <p><strong>Descrição:</strong> ${ev.descricao}</p>
-            <p><strong>Local:</strong> ${ev.local}</p>
+            <h3>${ev.titulo}</h3>
+            <p><strong>📅 Data:</strong> ${dataFormatada}</p>
+            <p><strong>📍 Local:</strong> ${ev.local}</p>
+            <p style="margin-top: 10px;"><strong>📝 Descrição:</strong> ${ev.descricao}</p>
         </div>
       `;
     });
