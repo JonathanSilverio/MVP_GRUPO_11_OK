@@ -5,16 +5,16 @@
 <title>Eventos Ambientais - Terê Verde Online</title>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  /* Container centralizado para manter o respiro nas laterais */
-  .conteudo-principal {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 20px;
+  /* Garante margens seguras em toda a área de conteúdo da página */
+  .conteudo {
+    max-width: 900px !important;
+    margin: 30px auto !important;
+    padding: 0 25px !important;
   }
 
-  .conteudo-principal > p {
+  .conteudo > p {
     font-size: 1.05rem;
-    color: #444;
+    color: #333;
     line-height: 1.6;
     margin-bottom: 25px;
   }
@@ -22,54 +22,45 @@
   h2 {
     font-size: 1.5rem;
     color: #1e4d20;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    margin-top: 30px;
+    margin-bottom: 15px;
   }
 
   #listaEventos {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 20px;
   }
 
-  /* Design Moderno para o Card de Próximos Eventos */
+  /* Card de Próximos Eventos com cor marcante e moderna (Tom de verde-claro/oliva acinzentado super distinto) */
   .evento-card {
-    background: linear-gradient(135deg, #f7fbf8 0%, #edf7f0 100%);
-    border: 1px solid #d5e8da;
-    max-width: 100%;
-    padding: 24px 28px;
-    border-radius: 12px;
-    border-left: 6px solid #2e6930;
-    color: #2c3e50;
-    box-shadow: 0 4px 15px rgba(46, 105, 48, 0.06);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .evento-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(46, 105, 48, 0.12);
+    background-color: #eaf3ed !important;
+    border: 2px solid #b5d3be !important;
+    padding: 24px 28px !important;
+    border-radius: 10px !important;
+    border-left: 8px solid #1e4d20 !important;
+    color: #1a2e1b !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important;
   }
 
   .evento-card h3 {
     margin-top: 0;
     margin-bottom: 12px;
-    color: #1e4d20;
-    font-size: 1.3rem;
+    color: #143816 !important;
+    font-size: 1.35rem;
   }
 
   .evento-card p {
-    margin: 6px 0;
+    margin: 8px 0;
     line-height: 1.5;
-    color: #4a5568;
+    color: #2c4a2e !important;
   }
 
-  /* Seção de Eventos Realizados (Estilo Minimalista) */
+  /* Seção de Eventos Realizados */
   .secao-realizados {
-    margin-top: 50px;
-    padding-top: 30px;
-    border-top: 1px solid #e2e8f0;
+    margin-top: 45px;
+    padding-top: 25px;
+    border-top: 2px solid #d5d5d5;
   }
 </style>
 </head>
@@ -89,7 +80,7 @@
     </nav>
 </header>
 
-<section class="conteudo-principal">
+<section class="conteudo">
     <p>
         Aqui você encontra uma lista de eventos, ações e campanhas relacionadas à preservação ambiental, sustentabilidade e educação ecológica.
     </p>
@@ -104,13 +95,13 @@
     <div class="secao-realizados">
         <h2>📅 Eventos já realizados</h2>
         <div class="cards" style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
-            <div class="card" style="background: white; padding: 18px; border-radius: 8px; border: 1px solid #e2e8f0; flex: 1; min-width: 250px;">
+            <div class="card" style="background: white; padding: 18px; border-radius: 8px; border: 1px solid #cbd5e1; flex: 1; min-width: 250px;">
                 <h3 style="color: #2e6930; margin-top:0;">Corrida Ecológica</h3>
-                <p style="color: #666; margin-bottom:0;">Data: 12/04/2025</p>
+                <p style="color: #555; margin-bottom:0;">Data: 12/04/2025</p>
             </div>
-            <div class="card" style="background: white; padding: 18px; border-radius: 8px; border: 1px solid #e2e8f0; flex: 1; min-width: 250px;">
+            <div class="card" style="background: white; padding: 18px; border-radius: 8px; border: 1px solid #cbd5e1; flex: 1; min-width: 250px;">
                 <h3 style="color: #2e6930; margin-top:0;">Palestra sobre Biodiversidade</h3>
-                <p style="color: #666; margin-bottom:0;">Data: 20/05/2025</p>
+                <p style="color: #555; margin-bottom:0;">Data: 20/05/2025</p>
             </div>
         </div>
     </div>
@@ -158,7 +149,7 @@
     }
 
     container.innerHTML = '';
-    eventos.exports = eventos.forEach(ev => {
+    eventos.forEach(ev => {
       const dataFormatada = formataData(ev.data);
       container.innerHTML += `
         <div class="evento-card">
