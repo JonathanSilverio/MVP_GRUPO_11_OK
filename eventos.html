@@ -1,3 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Eventos Ambientais - Terê Verde Online</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Eventos</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="parques.html">Parques</a></li>
+            <li><a href="trilhas.html">Trilhas</a></li>
+            <li><a href="biodiversidade.html">Biodiversidade</a></li>
+            <li><a href="eventos.html" class="active">Eventos</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+</header>
+
 <section class="conteudo">
     <p>
         Aqui você encontra uma lista de eventos, ações e campanhas relacionadas à preservação ambiental, sustentabilidade e educação ecológica.
@@ -5,14 +28,20 @@
 
     <h2>🌿 Próximos Eventos</h2>
 
-    <!-- Onde os eventos cadastrados no painel vão aparecer dinamicamente -->
+    <!-- Onde os eventos cadastrados no painel admin vão aparecer dinamicamente -->
     <div id="listaEventos">
         <p>Carregando eventos...</p>
     </div>
 </section>
 
-<!-- Script para buscar os eventos do Supabase -->
+<footer>
+    <p>© 2025 Terê Verde Online</p>
+</footer>
+
+<!-- 1. Biblioteca do Supabase via CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- 2. Script para buscar os eventos do Supabase -->
 <script>
   const SUPABASE_URL = 'https://hxbjzzcqrzqtwfbevbgq.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_KzosMDDebQMNjV3stt7hwg_2KrFxrTW';
@@ -27,19 +56,19 @@
     const container = document.getElementById('listaEventos');
     
     if (error) {
-      container.innerHTML = '<p>Erro ao carregar eventos.</p>';
+      container.innerHTML = '<p>Erro ao carregar eventos do banco.</p>';
       return;
     }
 
-    if (eventos.length === 0) {
-      container.innerHTML = '<p>Nenhum evento cadastrado no momento.</p>';
+    if (!eventos || eventos.length === 0) {
+      container.innerHTML = '<p>Nenhum evento cadastrado no momento. Acesse o painel administrativo para cadastrar o primeiro!</p>';
       return;
     }
 
     container.innerHTML = '';
     eventos.forEach(ev => {
       container.innerHTML += `
-        <div class="evento-card" style="background: white; padding: 15px; margin-bottom: 15px; border-radius: 5px; border-left: 5px solid #2e6930;">
+        <div class="evento-card" style="background: white; padding: 15px; margin-bottom: 15px; border-radius: 5px; border-left: 5px solid #2e6930; color: #333;">
             <h3>${ev.titulo}</h3>
             <p><strong>Data:</strong> ${ev.data}</p>
             <p><strong>Descrição:</strong> ${ev.descricao}</p>
@@ -51,3 +80,6 @@
 
   carregarEventos();
 </script>
+
+</body>
+</html>
