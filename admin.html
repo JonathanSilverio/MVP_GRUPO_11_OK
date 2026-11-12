@@ -1,46 +1,188 @@
-<section class="conteudo">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Painel do Administrador - Terê Verde Online</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* Layout centralizado e moderno para o Painel Admin */
+  .admin-container {
+    max-width: 650px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 35px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+  }
+
+  .admin-container h2 {
+    color: #1e4d20;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.6rem;
+  }
+
+  .admin-sub {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+  }
+
+  /* Campos de input e textarea padronizados e elegantes */
+  .admin-container input[type="text"],
+  .admin-container textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f8fafc;
+    box-sizing: border-box;
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+
+  .admin-container input[type="text"]:focus,
+  .admin-container textarea:focus {
+    outline: none;
+    border-color: #2e6930;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(46, 105, 48, 0.1);
+  }
+
+  .admin-container textarea {
+    resize: vertical;
+    min-height: 110px;
+  }
+
+  /* Botão de ação moderno e destacado */
+  .btn-salvar {
+    width: 100%;
+    background-color: #2e6930;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 10px;
+  }
+
+  .btn-salvar:hover {
+    background-color: #245226;
+  }
+
+  .btn-salvar:active {
+    transform: scale(0.99);
+  }
+
+  .footer-links {
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  .footer-links a {
+    color: #2e6930;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .footer-links a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="admin-container">
     <h2>Painel do Administrador</h2>
-    <p>Bem-vindo ao painel de controle. Aqui você pode cadastrar novos eventos para o Terê Verde Online.</p>
+    <p class="admin-sub">Bem-vindo ao painel de controle. Aqui você pode cadastrar novos eventos para o Terê Verde Online.</p>
 
-    <!-- Formulário para cadastrar novos eventos -->
-    <div style="background: #f4f4f4; padding: 20px; border-radius: 8px; margin-top: 20px;">
-        <h3>Cadastrar Novo Evento</h3>
-        <form id="formNovoEvento" style="display: flex; flex-direction: column; gap: 10px; max-width: 500px;">
-            <input type="text" id="eventoTitulo" placeholder="Título do Evento" required style="padding: 8px;">
-            <input type="text" id="eventoData" placeholder="Data (ex: 15/12/2026)" required style="padding: 8px;">
-            <input type="text" id="eventoLocal" placeholder="Local" required style="padding: 8px;">
-            <textarea id="eventoDescricao" placeholder="Descrição do Evento" rows="3" required style="padding: 8px;"></textarea>
-            <button type="submit" style="padding: 10px; background-color: #2e6930; color: white; border: none; cursor: pointer; font-weight: bold;">Salvar Evento</button>
-        </form>
+    <div id="mensagemFeedback"></div>
+
+    <form id="formEvento">
+        <div class="form-group">
+            <label for="titulo">Título do Evento</label>
+            <input type="text" id="titulo" placeholder="Ex: Caminhada Ecológica" required>
+        </div>
+
+        <div class="form-group">
+            <label for="data">Data do Evento</label>
+            <input type="text" id="data" placeholder="Ex: 15/12/2026" required>
+        </div>
+
+        <div class="form-group">
+            <label for="local">Local</label>
+            <input type="text" id="local" placeholder="Ex: Trilha do Castelinho" required>
+        </div>
+
+        <div class="form-group">
+            <label for="descricao">Descrição do Evento</label>
+            <textarea id="descricao" placeholder="Escreva os detalhes do evento aqui..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-salvar">Salvar Evento</button>
+    </form>
+
+    <div class="footer-links">
+        <a href="eventos.html">← Ir para o site (Ver Eventos)</a>
     </div>
+</div>
 
-    <p style="margin-top: 30px;"><a href="index.html">Ir para o site</a></p>
-</section>
-
-<!-- Script para lidar com o envio para o Supabase -->
+<!-- 1. Biblioteca do Supabase via CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- 2. Script de Cadastro -->
 <script>
   const SUPABASE_URL = 'https://hxbjzzcqrzqtwfbevbgq.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_KzosMDDebQMNjV3stt7hwg_2KrFxrTW';
   const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  document.getElementById('formNovoEvento').addEventListener('submit', async function(e) {
+  document.getElementById('formEvento').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const titulo = document.getElementById('eventoTitulo').value;
-    const data = document.getElementById('eventoData').value;
-    const local = document.getElementById('eventoLocal').value;
-    const descricao = document.getElementById('eventoDescricao').value;
+    const titulo = document.getElementById('titulo').value;
+    const data = document.getElementById('data').value;
+    const local = document.getElementById('local').value;
+    const descricao = document.getElementById('descricao').value;
+    const feedback = document.getElementById('mensagemFeedback');
 
-    const { error } = await _supabase
+    const { data: novoEvento, error } = await _supabase
       .from('eventos')
-      .insert([{ titulo, data, local, descricao }]);
+      .insert([{ titulo, data, local, descricao }])
+      .select();
 
     if (error) {
       alert('Erro ao cadastrar evento: ' + error.message);
-    } else {
-      alert('Evento cadastrado com sucesso!');
-      document.getElementById('formNovoEvento').reset();
+      return;
     }
+
+    feedback.innerHTML = '<div style="background: #d8eadf; color: #1a2e1b; padding: 12px; border-radius: 6px; margin-bottom: 20px; border-left: 5px solid #2e6930;">✅ Evento cadastrado com sucesso!</div>';
+    
+    // Limpa o formulário
+    document.getElementById('formEvento').reset();
+
+    // Limpa a mensagem de sucesso após 4 segundos
+    setTimeout(() => {
+      feedback.innerHTML = '';
+    }, 4000);
   });
 </script>
+
+</body>
+</html>
