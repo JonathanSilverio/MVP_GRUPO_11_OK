@@ -14,7 +14,6 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     border: 1px solid #e2e8f0;
   }
-
   .admin-header-flex {
     display: flex;
     justify-content: space-between;
@@ -23,20 +22,17 @@
     border-bottom: 2px solid #e2e8f0;
     padding-bottom: 15px;
   }
-
   .admin-container h2 {
     color: #1e4d20;
     margin-top: 0;
     margin-bottom: 5px;
     font-size: 1.6rem;
   }
-
   .admin-sub {
     color: #666;
     margin: 0;
     font-size: 0.95rem;
   }
-
   .btn-sair {
     background-color: #dc2626;
     color: white;
@@ -48,15 +44,12 @@
     cursor: pointer;
     transition: background-color 0.2s;
   }
-
   .btn-sair:hover {
     background-color: #b91c1c;
   }
-
   .form-group {
     margin-bottom: 20px;
   }
-
   .form-group label {
     display: block;
     font-weight: bold;
@@ -64,7 +57,6 @@
     margin-bottom: 6px;
     font-size: 0.9rem;
   }
-
   .admin-container input[type="text"],
   .admin-container textarea {
     width: 100%;
@@ -75,22 +67,11 @@
     color: #333;
     background-color: #f8fafc;
     box-sizing: border-box;
-    transition: border-color 0.2s, background-color 0.2s;
   }
-
-  .admin-container input[type="text"]:focus,
-  .admin-container textarea:focus {
-    outline: none;
-    border-color: #2e6930;
-    background-color: #fff;
-    box-shadow: 0 0 0 3px rgba(46, 105, 48, 0.1);
-  }
-
   .admin-container textarea {
     resize: vertical;
     min-height: 110px;
   }
-
   .btn-salvar {
     width: 100%;
     background-color: #2e6930;
@@ -101,14 +82,11 @@
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s;
     margin-top: 10px;
   }
-
   .btn-salvar:hover {
     background-color: #245226;
   }
-
   .btn-cancelar {
     width: 100%;
     background-color: #64748b;
@@ -122,17 +100,11 @@
     margin-top: 8px;
     display: none;
   }
-
-  .btn-cancelar:hover {
-    background-color: #475569;
-  }
-
   .secao-gerenciamento {
     margin-top: 40px;
     padding-top: 25px;
     border-top: 2px solid #e2e8f0;
   }
-
   .evento-item-admin {
     background: #f8fafc;
     border: 1px solid #cbd5e1;
@@ -144,24 +116,20 @@
     align-items: center;
     gap: 15px;
   }
-
   .evento-info h4 {
     margin: 0 0 5px 0;
     color: #1e4d20;
     font-size: 1.1rem;
   }
-
   .evento-info p {
     margin: 2px 0;
     font-size: 0.85rem;
     color: #555;
   }
-
   .acoes-btns {
     display: flex;
     gap: 8px;
   }
-
   .btn-editar {
     background-color: #0284c7;
     color: white;
@@ -172,7 +140,6 @@
     font-size: 0.85rem;
     font-weight: bold;
   }
-
   .btn-excluir {
     background-color: #dc2626;
     color: white;
@@ -183,12 +150,10 @@
     font-size: 0.85rem;
     font-weight: bold;
   }
-
   .footer-links {
     text-align: center;
     margin-top: 25px;
   }
-
   .footer-links a {
     color: #2e6930;
     text-decoration: none;
@@ -256,7 +221,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // 1. SEGURANÇA: Se não estiver logado, expulsa para a tela de login na hora
   if (localStorage.getItem('tere_verde_logado') !== 'true') {
     window.location.href = 'login.html';
   }
@@ -384,7 +348,7 @@
   }
 
   async function excluirEvento(id) {
-    if (!confirm('Deseja excluir este evento?')) return;
+    if (!confirm('Deseja excluir este evento?')) no;
     const { error } = await _supabase.from('eventos').delete().eq('id', id);
     if (error) { alert('Erro: ' + error.message); return; }
     carregarEventosAdmin();
