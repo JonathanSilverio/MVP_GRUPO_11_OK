@@ -5,7 +5,6 @@
 <title>Eventos Ambientais - Terê Verde Online</title>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  /* Garante margens seguras e espaçamento em toda a página */
   .conteudo {
     max-width: 900px !important;
     margin: 30px auto !important;
@@ -32,7 +31,6 @@
     gap: 20px;
   }
 
-  /* Seção de Eventos Realizados */
   .secao-realizados {
     margin-top: 45px;
     padding-top: 25px;
@@ -61,13 +59,11 @@
         Aqui você encontra uma lista de eventos, ações e campanhas relacionadas à preservação ambiental, sustentabilidade e educação ecológica.
     </p>
 
-    <!-- Próximos Eventos (Dinamicos do Supabase) -->
     <h2>🌿 Próximos Eventos</h2>
     <div id="listaEventos">
         <p style="color: #666; font-style: italic;">Sincronizando com os eventos cadastrados...</p>
     </div>
 
-    <!-- Eventos Já Realizados (Histórico) -->
     <div class="secao-realizados">
         <h2>📅 Eventos já realizados</h2>
         <div class="cards" style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
@@ -87,10 +83,7 @@
     <p>© 2025 Terê Verde Online</p>
 </footer>
 
-<!-- 1. Biblioteca do Supabase via CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- 2. Script para buscar, formatar e injetar o estilo direto no elemento -->
 <script>
   const SUPABASE_URL = 'https://hxbjzzcqrzqtwfbevbgq.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_KzosMDDebQMNjV3stt7hwg_2KrFxrTW';
@@ -120,18 +113,19 @@
     }
 
     if (!eventos || eventos.length === 0) {
-      container.innerHTML = '<p style="color: #666; font-style: italic;">Nenhum próximo evento cadastrado no momento. Acesse o painel administrativo para adicionar!</p>';
+      container.innerHTML = '<p style="color: #666; font-style: italic;">Nenhum próximo evento cadastrado no momento.</p>';
       return;
     }
 
     container.innerHTML = '';
     eventos.forEach(ev => {
       const dataFormatada = formataData(ev.data);
-      // Estilo direto no HTML via JavaScript para garantir que nenhuma regra externa pinte de branco
+      const horarioExibicao = ev.horario ? ` às ${ev.horario}` : '';
+      
       container.innerHTML += `
         <div style="background-color: #d8eadf !important; border: 2px solid #a3d0b2 !important; padding: 24px 28px !important; border-radius: 10px !important; border-left: 8px solid #1e4d20 !important; color: #1a2e1b !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important; margin-bottom: 15px !important;">
             <h3 style="margin-top: 0; margin-bottom: 12px; color: #143816 !important; font-size: 1.35rem;">${ev.titulo}</h3>
-            <p style="margin: 8px 0; color: #2c4a2e !important;"><strong>📅 Data:</strong> ${dataFormatada}</p>
+            <p style="margin: 8px 0; color: #2c4a2e !important;"><strong>📅 Data:</strong> ${dataFormatada}${horarioExibicao}</p>
             <p style="margin: 8px 0; color: #2c4a2e !important;"><strong>📍 Local:</strong> ${ev.local}</p>
             <p style="margin: 12px 0 0 0; color: #2c4a2e !important;"><strong>📝 Descrição:</strong> ${ev.descricao}</p>
         </div>
