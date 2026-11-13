@@ -6,8 +6,6 @@ Desenvolver protótipo para o MVP
 ## 👥 Integrantes da Equipe
 
 * **Jonathan Silvério de Oliveira**
-* **Pedro Crespo**
-* **Zimbrão**
 
 ## 📌 Situação-Problema Escolhida
 
@@ -22,6 +20,18 @@ Descrição resumida das principais tecnologias aplicadas no desenvolvimento do 
 * HTML/CSS – Estruturação, estilização e comportamento das páginas.
 
 * Framework Front-end (ex.: React) – Para construção da interface amigável e responsiva.
+
+* JavaScript (Node.js/Vanilla) (Linguagem de programação utilizada para implementar a lógica de comunicação assíncrona, manipulação de dados, funções de CRUD, autenticação e consumo da API do Supabase).
+
+* Supabase (Plataforma Backend-as-a-Service baseada em nuvem).
+
+* PostgreSQL (Banco de dados relacional hospedado e gerenciado pelo Supabase).
+
+* SQL (Linguagem de consulta e gerenciamento de banco de dados, utilizada para criação de tabelas e políticas de segurança).
+
+* Row Level Security (RLS) (Políticas de segurança de nível de linha do PostgreSQL para controle de acesso às operações de SELECT, INSERT, UPDATE e DELETE).
+
+* Supabase JavaScript Client (@supabase/supabase-js) (Biblioteca utilizada para fazer a ponte de comunicação e integração entre o front-end e o banco de dados).
 
 ## ▶️ Como Executar ou Abrir o MVP
 
@@ -39,7 +49,7 @@ Desenvolvimento de um website funcional contendo:
 
 - Sistema básico de login para administradores.
 
-- Área administrativa para atualização de informações e gestão de disponibilidade. (a ser desenvolvida)
+- Área administrativa para atualização de informações e gestão de disponibilidade. 
 
 ## 🎯 Objetivos e Benefícios do Produto
 
