@@ -1,10 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Painel do Administrador - Terê Verde Online</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .admin-container {
+    max-width: 750px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 35px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+  }
+
+  .admin-container h2 {
+    color: #1e4d20;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.6rem;
+  }
+
+  .admin-sub {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+  }
+
+  .admin-container input[type="text"],
+  .admin-container textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f8fafc;
+    box-sizing: border-box;
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+
+  .admin-container input[type="text"]:focus,
+  .admin-container textarea:focus {
+    outline: none;
+    border-color: #2e6930;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(46, 105, 48, 0.1);
+  }
+
+  .admin-container textarea {
+    resize: vertical;
+    min-height: 110px;
+  }
+
+  .btn-salvar {
+    width: 100%;
+    background-color: #2e6930;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+  }
+
+  .btn-salvar:hover {
+    background-color: #245226;
+  }
+
+  .btn-cancelar {
+    width: 100%;
+    background-color: #64748b;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+    display: none;
+  }
+
+  .btn-cancelar:hover {
+    background-color: #475569;
+  }
+
+  .secao-gerenciamento {
+    margin-top: 40px;
+    padding-top: 25px;
+    border-top: 2px solid #e2e8f0;
+  }
+
+  .evento-item-admin {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .evento-info h4 {
+    margin: 0 0 5px 0;
+    color: #1e4d20;
+    font-size: 1.1rem;
+  }
+
+  .evento-info p {
+    margin: 2px 0;
+    font-size: 0.85rem;
+    color: #555;
+  }
+
+  .acoes-btns {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-editar {
+    background-color: #0284c7;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+  }
+
+  .btn-excluir {
+    background-color: #dc2626;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+  }
+
+  .footer-links {
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  .footer-links a {
+    color: #2e6930;
+    text-decoration: none;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div class="admin-container">
+    <h2>Painel do Administrador</h2>
+    <p class="admin-sub">Gerencie os eventos do Terê Verde Online.</p>
+
+    <div id="mensagemFeedback"></div>
+
+    <form id="formEvento">
+        <input type="hidden" id="eventoId">
+
+        <div class="form-group">
+            <label for="titulo">Título do Evento</label>
+            <input type="text" id="titulo" placeholder="Ex: Caminhada Ecológica" required>
+        </div>
+
+        <div class="form-group" style="display: flex; gap: 15px;">
+            <div style="flex: 1;">
+                <label for="data">Data do Evento</label>
+                <input type="text" id="data" placeholder="Ex: 15/12/2026" required>
+            </div>
+            <div style="flex: 1;">
+                <label for="horario">Horário</label>
+                <input type="text" id="horario" placeholder="Ex: 09:00" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="local">Local</label>
+            <input type="text" id="local" placeholder="Ex: Trilha do Castelinho" required>
+        </div>
+
+        <div class="form-group">
+            <label for="descricao">Descrição do Evento</label>
+            <textarea id="descricao" placeholder="Escreva os detalhes do evento aqui..." required></textarea>
+        </div>
+
+        <button type="submit" id="btnSalvar" class="btn-salvar">Salvar Evento</button>
+        <button type="button" id="btnCancelar" class="btn-cancelar" onclick="cancelarEdicao()">Cancelar Edição</button>
+    </form>
+
+    <div class="secao-gerenciamento">
+        <h2>📋 Eventos Cadastrados</h2>
+        <div id="listaAdminEventos">
+            <p style="color: #666; font-style: italic;">Carregando eventos...</p>
+        </div>
+    </div>
+
+    <div class="footer-links">
+        <a href="eventos.html">← Ir para o site (Ver Eventos)</a>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   const SUPABASE_URL = 'https://hxbjzzcqrzqtwfbevbgq.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_KzosMDDebQMNjV3stt7hwg_2KrFxrTW';
   const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // Converte de AAAA-MM-DD (banco) para DD/MM/AAAA (tela)
   function formataDataParaBR(dataStr) {
     if (!dataStr) return '';
     if (!dataStr.includes('-')) return dataStr;
@@ -15,7 +240,6 @@
     return dataStr;
   }
 
-  // Converte de DD/MM/AAAA (formulário) para AAAA-MM-DD (banco)
   function formataDataParaBanco(dataStr) {
     if (!dataStr) return '';
     if (!dataStr.includes('/')) return dataStr;
@@ -68,7 +292,7 @@
     const id = document.getElementById('eventoId').value;
     const titulo = document.getElementById('titulo').value;
     const dataInput = document.getElementById('data').value;
-    const data = formataDataParaBanco(dataInput); // Garante que vai no formato aceito pelo PostgreSQL
+    const data = formataDataParaBanco(dataInput);
     const horario = document.getElementById('horario').value;
     const local = document.getElementById('local').value;
     const descricao = document.getElementById('descricao').value;
@@ -100,7 +324,7 @@
   function prepararEdicao(id, titulo, dataBR, horario, local, descricao) {
     document.getElementById('eventoId').value = id;
     document.getElementById('titulo').value = titulo;
-    document.getElementById('data').value = dataBR; // Já preenche o input como DD/MM/AAAA
+    document.getElementById('data').value = dataBR;
     document.getElementById('horario').value = horario;
     document.getElementById('local').value = local;
     document.getElementById('descricao').value = descricao;
@@ -126,3 +350,6 @@
 
   carregarEventosAdmin();
 </script>
+
+</body>
+</html>
