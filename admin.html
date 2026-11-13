@@ -5,7 +5,6 @@
 <title>Painel do Administrador - Terê Verde Online</title>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  /* Layout centralizado e moderno para o Painel Admin */
   .admin-container {
     max-width: 750px;
     margin: 40px auto;
@@ -96,14 +95,13 @@
     font-weight: bold;
     cursor: pointer;
     margin-top: 8px;
-    display: none; /* Só aparece quando estiver editando */
+    display: none;
   }
 
   .btn-cancelar:hover {
     background-color: #475569;
   }
 
-  /* Seção de Gerenciamento / Listagem */
   .secao-gerenciamento {
     margin-top: 40px;
     padding-top: 25px;
@@ -150,10 +148,6 @@
     font-weight: bold;
   }
 
-  .btn-editar:hover {
-    background-color: #0369a1;
-  }
-
   .btn-excluir {
     background-color: #dc2626;
     color: white;
@@ -163,10 +157,6 @@
     cursor: pointer;
     font-size: 0.85rem;
     font-weight: bold;
-  }
-
-  .btn-excluir:hover {
-    background-color: #b91c1c;
   }
 
   .footer-links {
@@ -179,32 +169,33 @@
     text-decoration: none;
     font-weight: 600;
   }
-
-  .footer-links a:hover {
-    text-decoration: underline;
-  }
 </style>
 </head>
 <body>
 
 <div class="admin-container">
     <h2>Painel do Administrador</h2>
-    <p class="admin-sub">Gerencie os eventos do Terê Verde Online (cadastre, edite ou remova quando precisar).</p>
+    <p class="admin-sub">Gerencie os eventos do Terê Verde Online.</p>
 
     <div id="mensagemFeedback"></div>
 
-    <!-- Formulário (Usado tanto para Criar quanto para Editar) -->
     <form id="formEvento">
-        <input type="hidden" id="eventoId"> <!-- Guarda o ID se estivermos editando -->
+        <input type="hidden" id="eventoId">
 
         <div class="form-group">
             <label for="titulo">Título do Evento</label>
             <input type="text" id="titulo" placeholder="Ex: Caminhada Ecológica" required>
         </div>
 
-        <div class="form-group">
-            <label for="data">Data do Evento</label>
-            <input type="text" id="data" placeholder="Ex: 15/12/2026" required>
+        <div class="form-group" style="display: flex; gap: 15px;">
+            <div style="flex: 1;">
+                <label for="data">Data do Evento</label>
+                <input type="text" id="data" placeholder="Ex: 15/12/2026" required>
+            </div>
+            <div style="flex: 1;">
+                <label for="horario">Horário</label>
+                <input type="text" id="horario" placeholder="Ex: 09:00" required>
+            </div>
         </div>
 
         <div class="form-group">
@@ -221,7 +212,6 @@
         <button type="button" id="btnCancelar" class="btn-cancelar" onclick="cancelarEdicao()">Cancelar Edição</button>
     </form>
 
-    <!-- Lista de Eventos Cadastrados com Opções de Editar / Excluir -->
     <div class="secao-gerenciamento">
         <h2>📋 Eventos Cadastrados</h2>
         <div id="listaAdminEventos">
@@ -234,16 +224,12 @@
     </div>
 </div>
 
-<!-- 1. Biblioteca do Supabase via CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- 2. Script de Gerenciamento Completo (CRUD) -->
 <script>
   const SUPABASE_URL = 'https://hxbjzzcqrzqtwfbevbgq.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_KzosMDDebQMNjV3stt7hwg_2KrFxrTW';
   const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // Carregar eventos na tabela administrativa ao abrir a página
   async function carregarEventosAdmin() {
     const { data: eventos, error } = await _supabase
       .from('eventos')
@@ -251,27 +237,26 @@
       .order('id', { ascending: false });
 
     const container = document.getElementById('listaAdminEventos');
-    
     if (error) {
       container.innerHTML = '<p style="color: #c53030;">Erro ao carregar eventos.</p>';
       return;
     }
-
     if (!eventos || eventos.length === 0) {
-      container.innerHTML = '<p style="color: #666; font-style: italic;">Nenhum evento cadastrado no momento.</p>';
+      container.innerHTML = '<p style="color: #666; font-style: italic;">Nenhum evento cadastrado.</p>';
       return;
     }
 
     container.innerHTML = '';
     eventos.forEach(ev => {
+      const horarioTexto = ev.horario ? ` | ⏰ ${ev.horario}` : '';
       container.innerHTML += `
         <div class="evento-item-admin">
             <div class="evento-info">
                 <h4>${ev.titulo}</h4>
-                <p><strong>Data:</strong> ${ev.data} | <strong>Local:</strong> ${ev.local}</p>
+                <p><strong>Data:</strong> ${ev.data}${horarioTexto} | <strong>Local:</strong> ${ev.local}</p>
             </div>
             <div class="acoes-btns">
-                <button class="btn-editar" onclick="prepararEdicao(${ev.id}, '${ev.titulo.replace(/'/g, "\\'")}', '${ev.data}', '${ev.local.replace(/'/g, "\\'")}', '${ev.descricao.replace(/'/g, "\\'")}')">Editar</button>
+                <button class="btn-editar" onclick="prepararEdicao(${ev.id}, '${ev.titulo.replace(/'/g, "\\'")}', '${ev.data}', '${ev.horario || ''}', '${ev.local.replace(/'/g, "\\'")}', '${ev.descricao.replace(/'/g, "\\'")}')">Editar</button>
                 <button class="btn-excluir" onclick="excluirEvento(${ev.id})">Excluir</button>
             </div>
         </div>
@@ -279,56 +264,45 @@
     });
   }
 
-  // Enviar formulário (Salvar novo ou Atualizar existente)
   document.getElementById('formEvento').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const id = document.getElementById('eventoId').value;
     const titulo = document.getElementById('titulo').value;
     const data = document.getElementById('data').value;
-    const local = document.getElementById('local'].value;
+    const horario = document.getElementById('horario').value;
+    const local = document.getElementById('local').value;
     const descricao = document.getElementById('descricao').value;
     const feedback = document.getElementById('mensagemFeedback');
 
     if (id) {
-      // ATUALIZAR (UPDATE)
       const { error } = await _supabase
         .from('eventos')
-        .update({ titulo, data, local, descricao })
+        .update({ titulo, data, horario, local, descricao })
         .eq('id', id);
 
-      if (error) {
-        alert('Erro ao atualizar: ' + error.message);
-        return;
-      }
+      if (error) { alert('Erro: ' + error.message); return; }
       feedback.innerHTML = '<div style="background: #d8eadf; color: #1a2e1b; padding: 12px; border-radius: 6px; margin-bottom: 20px; border-left: 5px solid #2e6930;">✅ Evento atualizado com sucesso!</div>';
       cancelarEdicao();
     } else {
-      // CADASTRAR NOVO (INSERT)
       const { error } = await _supabase
         .from('eventos')
-        .insert([{ titulo, data, local, descricao }]);
+        .insert([{ titulo, data, horario, local, descricao }]);
 
-      if (error) {
-        alert('Erro ao cadastrar: ' + error.message);
-        return;
-      }
+      if (error) { alert('Erro: ' + error.message); return; }
       feedback.innerHTML = '<div style="background: #d8eadf; color: #1a2e1b; padding: 12px; border-radius: 6px; margin-bottom: 20px; border-left: 5px solid #2e6930;">✅ Evento cadastrado com sucesso!</div>';
       document.getElementById('formEvento').reset();
     }
 
     carregarEventosAdmin();
-
-    setTimeout(() => {
-      feedback.innerHTML = '';
-    }, 4000);
+    setTimeout(() => { feedback.innerHTML = ''; }, 4000);
   });
 
-  // Preencher o formulário com os dados para edição
-  function prepararEdicao(id, titulo, data, local, descricao) {
+  function prepararEdicao(id, titulo, data, horario, local, descricao) {
     document.getElementById('eventoId').value = id;
     document.getElementById('titulo').value = titulo;
     document.getElementById('data').value = data;
+    document.getElementById('horario').value = horario;
     document.getElementById('local').value = local;
     document.getElementById('descricao').value = descricao;
 
@@ -337,7 +311,6 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Cancelar o modo de edição
   function cancelarEdicao() {
     document.getElementById('formEvento').reset();
     document.getElementById('eventoId').value = '';
@@ -345,24 +318,13 @@
     document.getElementById('btnCancelar').style.display = 'none';
   }
 
-  // Excluir evento
   async function excluirEvento(id) {
-    if (!confirm('Tem certeza que deseja excluir este evento?')) return;
-
-    const { error } = await _supabase
-      .from('eventos')
-      .delete()
-      .eq('id', id);
-
-    if (error) {
-      alert('Erro ao excluir: ' + error.message);
-      return;
-    }
-
+    if (!confirm('Deseja excluir este evento?')) return;
+    const { error } = await _supabase.from('eventos').delete().eq('id', id);
+    if (error) { alert('Erro: ' + error.message); return; }
     carregarEventosAdmin();
   }
 
-  // Inicializa carregando a lista
   carregarEventosAdmin();
 </script>
 
